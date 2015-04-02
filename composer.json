@@ -1,0 +1,35 @@
+{
+    "name" : "kl3sk/chosenbundle",
+    "description" : "Port chosen to symfony 2",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "kl2sk",
+        "email" : "klesk44@gmail.com"
+    }],
+    "keywords" : [
+        "chossen bundle"
+    ],
+    "license" : [
+        {
+            "type": "MIT",
+            "url": "https://github.com/harvesthq/chosen/blob/master/LICENSE.md"
+        }
+    ],
+    "require" : {
+        "jquery/jquery":  "1.11.*",
+        "drmonty/chosen": "dev-master"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Kl3sk\\ChosenBundle" : ""
+        }
+    },
+    "target-dir" : "Kl3sk/ChosenBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "1.0"
+        }
+    }
+}

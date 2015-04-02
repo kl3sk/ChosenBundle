@@ -1,0 +1,4 @@
+services:
+#    kl3sk_chosen.example:
+#        class: Kl3sk\ChosenBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
