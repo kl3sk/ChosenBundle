@@ -3,4 +3,4 @@ Port chosen for symfony
 
 #WIP
 
-This bundle is under progress, please do use yet
+This bundle is under progress, please do not use yet
