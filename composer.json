@@ -19,7 +19,7 @@
     },
     "suggest": {
         "jquery/jquery":  "1.11.*"
-    }
+    },
     "autoload" : {
         "psr-0" : {
             "Kl3sk\\ChosenBundle" : ""
