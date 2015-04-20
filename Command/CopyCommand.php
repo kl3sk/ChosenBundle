@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Console\Input\ArrayInput;
 
 class CopyCommand extends ContainerAwareCommand
 {
@@ -32,6 +33,10 @@ class CopyCommand extends ContainerAwareCommand
         $this
             ->setName('kl3sk:chosen')
             ->setDescription('Copy Chosen asset into Kl3skBundleChose asset folder')
+            ->addOption('asset', 'a', InputOption::VALUE_NONE, 'If set perform a default asset:install')
+            ->addOption('asset-link', 'al', InputOption::VALUE_NONE, 'Assets links')
+            // ->addArgument('asset-link', null, InputArgument::REQUIRED, 'Assets links')
+            ->setHelp("The <info>System</info> that copies from <info>chosen</info> packge to <info>this bundle</info>");
         ;
     }
 
@@ -73,6 +78,13 @@ class CopyCommand extends ContainerAwareCommand
             ];
         }
 
+        $files += [
+            'img' => [
+                'chosen-sprite.png',
+                'chosen-sprite@2x.png',
+            ],
+        ];
+
 
         // Copy files into Public bundle's folder
         try {
@@ -94,6 +106,35 @@ class CopyCommand extends ContainerAwareCommand
             $output->writeln("An error occurred while copying file ".$e->getPath());
         }
 
-        $output->writeln("<info>Your files have been copied to Kl3skChosenBundle, dont forget to install assets<info> <comment>php app/console asset:install</comment>");
+        foreach($files['img'] as $img)
+        {
+            try {
+                $this->fs->copy(
+                    $vendor . DIRECTORY_SEPARATOR . $chosen . DIRECTORY_SEPARATOR . 'css/' . $img,
+                    dirname(__FILE__) . DIRECTORY_SEPARATOR . '../Resources/public/css' . DIRECTORY_SEPARATOR . $img,
+                    true
+                );
+            } catch(IOExceptionInterface $e) {
+                $output->writeln("An error occurred while copying image ".$e->getPath());
+            }
+        }
+
+        if($input->getOption('asset'))
+        {
+            $app = $this->getApplication();
+            
+            // Install assets
+            $output->writeln("<info>Force install<info>");
+            $in = new ArrayInput([
+                'command' => 'asset:install',
+                '--env'   => $env,
+                '--symlink' => !$input->getOption('asset-link')
+            ]);
+            $app->doRun($in, $output);
+        }
+        else
+        {
+            $output->writeln("<info>Your files have been copied to Kl3skChosenBundle, dont forget to install assets<info> <comment>php app/console asset:install</comment>");
+        }
     }
 }
