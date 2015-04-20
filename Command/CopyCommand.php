@@ -30,7 +30,7 @@ class CopyCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('kl3sk:chosen:copy')
+            ->setName('kl3sk:chosen')
             ->setDescription('Copy Chosen asset into Kl3skBundleChose asset folder')
         ;
     }
