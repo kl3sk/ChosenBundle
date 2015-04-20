@@ -2,8 +2,30 @@
 <html>
 <head>
 	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/kl3skchosen/css/chosen.css') }}">
 </head>
 <body>
 	Hello {{ name }}!
+
+	<select name="chosen" id="chosen" class="chosen-select">
+		<option value="0">AAAAA</option>
+		<option value="1">BBBBB</option>
+		<option value="2">CCCCC</option>
+		<option value="3">DDDDD</option>
+		<option value="4">EEEEE</option>
+		<option value="5">FFFFF</option>
+		<option value="6">GGGGG</option>
+		<option value="7">HHHHH</option>
+		<option value="8">IIIII</option>
+		<option value="9">JJJJJ</option>
+	</select>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-git1.min.js"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kl3skchosen/js/chosen.jquery.js') }}"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".chosen-select").chosen();
+	});
+	</script>
 </body>
 </html>
